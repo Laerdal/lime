@@ -207,30 +207,37 @@ class Preloader #if flash extends Sprite #end {
 			});
 			
 		} else {
-			
-			var node:SpanElement = cast Browser.document.createElement ("span");
-			node.innerHTML = "giItT1WQy@!-/#";
-			var style = node.style;
-			style.position = "absolute";
-			style.left = "-10000px";
-			style.top = "-10000px";
-			style.fontSize = "300px";
-			style.fontFamily = "sans-serif";
-			style.fontVariant = "normal";
-			style.fontStyle = "normal";
-			style.fontWeight = "normal";
-			style.letterSpacing = "0";
-			Browser.document.body.appendChild (node);
-			
-			var width = node.offsetWidth;
-			style.fontFamily = "'" + font + "', sans-serif";
+			// Fix for preloading default fonts, e.g. Arial.
+            function makeNode(fallbackFont : String) {
+                var node:SpanElement = cast Browser.document.createElement ("span");
+                node.innerHTML = "giItT1WQy@!-/#";
+                var style = node.style;
+                style.position = "absolute";
+                style.left = "-10000px";
+                style.top = "-10000px";
+                style.fontSize = "300px";
+                style.fontFamily = fallbackFont;
+                style.fontVariant = "normal";
+                style.fontStyle = "normal";
+                style.fontWeight = "normal";
+                style.letterSpacing = "0";
+                Browser.document.body.appendChild (node);
+                return node;
+            }
+            var node1 = makeNode("sans-serif");
+            var node2 = makeNode("serif");
+			var width1 = node1.offsetWidth;
+			var width2 = node2.offsetWidth;
+            var testFont = "'" + font + "', sans-serif";
+            node1.style.fontFamily = testFont;
+            node2.style.fontFamily = testFont;
 			
 			var interval:Null<Int> = null;
 			var found = false;
 			
 			var checkFont = function () {
 				
-				if (node.offsetWidth != width) {
+				if (node1.offsetWidth != width1 || node2.offsetWidth != width2) {
 					
 					// Test font was still not available yet, try waiting one more interval?
 					if (!found) {
@@ -248,8 +255,10 @@ class Preloader #if flash extends Sprite #end {
 						
 					}
 					
-					node.parentNode.removeChild (node);
-					node = null;
+					node1.parentNode.removeChild (node1);
+					node2.parentNode.removeChild (node2);
+					node1 = null;
+                    node2 = null;
 					
 					onProgress.dispatch (loaded + bytesLoaded, total + bytesTotal);
 					
