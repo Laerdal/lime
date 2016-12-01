@@ -2,10 +2,6 @@
 .DS_Store
 .DS_Store?
 Export/
-ndll/*/lime*
-ndll/*/liblime*
-ndll/*/nme*
-nddl/*/libnme*
 project/all_objs
 project/obj
 project/vc*.pdb
