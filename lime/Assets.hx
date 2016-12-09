@@ -748,7 +748,7 @@ class AssetLibrary {
 		var total   = 0;
 		var loaded  = 0;
 		
-		var onLoadComplete = function (_) {
+		var onLoadComplete = function (?_) {
 			
 			loaded++;
 			
@@ -780,6 +780,12 @@ class AssetLibrary {
 				//onProgress
 				
 			}
+			
+		}
+		
+		if (total == 0) {
+			
+			onLoadComplete ();
 			
 		}
 		
