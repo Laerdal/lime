@@ -1387,6 +1387,8 @@ class Image {
 		
 		#if (js && html5)
 			
+			this.type = CANVAS;
+			
 			var image = new JSImage ();
 			image.crossOrigin = "Anonymous";
 			
