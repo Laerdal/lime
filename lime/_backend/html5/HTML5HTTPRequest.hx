@@ -63,6 +63,7 @@ class HTML5HTTPRequest {
 	private function load (uri:String, progress:Dynamic, readyStateChange:Dynamic):Void {
 		
 		request = new XMLHttpRequest ();
+		request.timeout = 90000;
 		request.addEventListener ("progress", progress, false);
 		request.onreadystatechange = readyStateChange;
 		
