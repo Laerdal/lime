@@ -10,6 +10,7 @@ typedef Config = {
 	@:optional var company:String;
 	@:optional var file:String;
 	@:optional var fps:Int;
+	@:optional var httpReqTimeout:Int;
 	@:optional var name:String;
 	@:optional var orientation:String;
 	@:optional var packageName:String;

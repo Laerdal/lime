@@ -2,6 +2,7 @@ package lime.net; #if !macro
 
 
 import haxe.io.Bytes;
+import lime.app.Application;
 import lime.app.Event;
 import lime.app.Future;
 import lime.app.Promise;
@@ -49,7 +50,7 @@ private class AbstractHTTPRequest<T> implements _IHTTPRequest {
 		formData = new Map ();
 		headers = [];
 		method = GET;
-		timeout = 30000;
+		timeout = (Application.current.config != null && Reflect.hasField (Application.current.config, "httpReqTimeout")) ? Reflect.field (Application.current.config, "httpReqTimeout") : 30000;
 		
 		#if !display
 		backend = new HTTPRequestBackend ();
