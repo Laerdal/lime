@@ -2100,7 +2100,7 @@ class ProjectXMLParser extends HXProject {
 						
 					}
 				
-				case "height", "width", "fps", "antialiasing":
+				case "height", "width", "fps", "antialiasing", "httpReqTimeout":
 					
 					if (Reflect.hasField (windows[id], name)) {
 						

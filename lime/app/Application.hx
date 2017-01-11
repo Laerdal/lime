@@ -33,6 +33,7 @@ class Application extends Module {
 	
 	public var config (default, null):Config;
 	public var frameRate (get, set):Float;
+	public var httpReqTimeout (default, null):Int;
 	public var modules (default, null):Array<IModule>;
 	public var preloader (get, null):Preloader;
 	
@@ -142,6 +143,12 @@ class Application extends Module {
 				
 			}
 			
+			if (Reflect.hasField (config, "httpReqTimeout")) {
+				
+				httpReqTimeout = config.httpReqTimeout;
+				
+			}
+
 			if (Reflect.hasField (config, "windows")) {
 				
 				for (windowConfig in config.windows) {
