@@ -4,7 +4,10 @@ package lime.system;
 #if flash
 import flash.desktop.Clipboard in FlashClipboard;
 #elseif js
+import lime._backend.html5.HTML5Window;
 import js.Browser.document;
+
+@:access(lime._backend.html5.HTML5Window)
 #end
 
 #if !macro
@@ -61,9 +64,20 @@ class Clipboard {
 		#elseif js
 		_text = value;
 		
-		#if html5
-		if (document.queryCommandEnabled("copy"))
+		#if html5 // HTML5 needs focus on <input> field for clipboard events to work
+		if  (HTML5Window.textInput != null) {
+			
+			HTML5Window.textInput.focus();
+			HTML5Window.textInput.value = _text;
+			HTML5Window.textInput.select();
+			
+		}
+		
+		if (document.queryCommandEnabled("copy")) {
+			
 			document.execCommand("copy");
+			
+		}
 		#end
 		
 		return value;
