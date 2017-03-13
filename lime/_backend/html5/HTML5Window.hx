@@ -765,7 +765,7 @@ class HTML5Window {
 	
 	public function setFullscreen (value:Bool):Bool {
 		
-		return false;
+		return value;
 		
 	}
 	
