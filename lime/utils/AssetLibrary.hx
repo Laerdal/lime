@@ -7,7 +7,6 @@ import lime.app.Future;
 import lime.app.Promise;
 import lime.media.AudioBuffer;
 import lime.graphics.Image;
-import lime.net.HTTPRequest;
 import lime.text.Font;
 import lime.utils.AssetType;
 
@@ -638,26 +637,27 @@ class AssetLibrary {
 			
 			return Future.withValue (cachedText.get (id));
 			
-		} else if (cachedBytes.exists (id) || classTypes.exists (id)) {
-			
-			var bytes = getBytes (id);
-			
-			if (bytes == null) {
-				
-				return cast Future.withValue (null);
-				
-			} else {
-				
-				var text = bytes.getString (0, bytes.length);
-				cachedText.set (id, text);
-				return Future.withValue (text);
-				
-			}
-			
 		} else {
 			
-			var request = new HTTPRequest<String> ();
-			return request.load (paths.get (id));
+			return loadBytes (id).then (function (bytes) {
+				
+				return new Future<String> (function () {
+					
+					if (bytes == null) {
+						
+						return null;
+						
+					} else {
+						
+						var text = bytes.getString (0, bytes.length);
+						cachedText.set(id, text);
+						return text;
+						
+					}
+					
+				}, true);
+				
+			});
 			
 		}
 		
