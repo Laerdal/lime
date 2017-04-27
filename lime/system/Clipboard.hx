@@ -65,6 +65,7 @@ class Clipboard {
 		FlashClipboard.generalClipboard.setData (TEXT_FORMAT, value);
 		return value;
 		#elseif (js && html5)
+		if (_text == value) return value; //prevent infinite recursion in Firefox
 		_text = value;
 		var window = Application.current.window;
 		if (window != null) {
