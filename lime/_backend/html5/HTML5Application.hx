@@ -283,7 +283,7 @@ class HTML5Application {
 		}
 		
 		Browser.window.requestAnimationFrame (cast handleApplicationEvent);
-		
+					
 	}
 	
 	
@@ -349,7 +349,17 @@ class HTML5Application {
 				
 				case "resize":
 					
-					parent.window.backend.handleResizeEvent (event);
+					Browser.window.requestAnimationFrame ( function(?__) { 
+						parent.window.backend.updateSize ();
+						
+						if (parent.renderer != null && parent.renderer.context != null) {
+							
+							parent.renderer.render ();
+							parent.renderer.onRender.dispatch ();
+							parent.renderer.flip ();
+						}
+						
+					});
 				
 				case "beforeunload":
 					
