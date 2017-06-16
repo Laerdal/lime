@@ -163,8 +163,9 @@ class HTML5Window {
 			cacheElementWidth = parent.width;
 			cacheElementHeight = parent.height;
 			
+			#if flash
 			parent.fullscreen = true;
-			
+			#end
 		}
 		
 		if (canvas != null) {
