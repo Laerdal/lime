@@ -170,6 +170,9 @@ class HTML5Window {
 			
 			resizeElement = true;
 			
+			#if flash
+			parent.fullscreen = true;
+			#end
 		}
 		
 		if (canvas != null) {
