@@ -284,14 +284,14 @@ class HTML5Window {
 		
 	}
 	
-	
+/*	
 	private function handleCutOrCopyEvent (event:ClipboardEvent):Void {
 		
 		event.clipboardData.setData ("text/plain", Clipboard.text);
 		event.preventDefault ();
 		
 	}
-	
+*/	
 	
 	private function handleFocusEvent (event:FocusEvent):Void {
 		
@@ -540,7 +540,7 @@ class HTML5Window {
 		
 	}
 	
-	
+/*	
 	private function handlePasteEvent (event:ClipboardEvent):Void {
 		
 		if (untyped event.clipboardData.types.indexOf ("text/plain") > -1) {
@@ -559,7 +559,7 @@ class HTML5Window {
 		}
 		
 	}
-	
+*/	
 	
 	private function handleResizeEvent (event:js.html.Event):Void {
 		
